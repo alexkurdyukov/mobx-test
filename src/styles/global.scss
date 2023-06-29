@@ -1,0 +1,17 @@
+* {
+    color: #000000;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: sans-serif;
+}
+
+.App {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    justify-content: center;
+    align-items: center;
+}
