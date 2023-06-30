@@ -4,9 +4,10 @@ import { Button } from "../../ui/Button/Button";
 import styles from "./AppWidget.module.scss";
 import { observer } from "mobx-react-lite";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
+import { toJS } from "mobx";
 
 export const AppWidget = observer(() => {
-    const { cards, addCard, logCards } = store;
+    const { cards, addCard } = store;
     return (
         <div className={styles.appwidget}>
             <Button
@@ -17,7 +18,7 @@ export const AppWidget = observer(() => {
             ></Button>
             <Button
                 onClick={() => {
-                    console.log(cards);
+                    console.log(toJS(cards));
                 }}
                 text="Вывести результат в консоль"
                 icon={<FontAwesomeIcon icon={faCode} />}

@@ -5,7 +5,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import cn from "classnames";
 import { useOnClickOutside } from "../../Hooks/useClickOutside";
 import { Env, Location } from "../../store";
-import { DEFAULT_DROPDOWN_TEXT } from "../../Constants";
+import { DEFAULT_DROPDOWN_TEXT } from "../../constants";
 
 export const Dropdown = ({
     icon,
@@ -44,7 +44,7 @@ export const Dropdown = ({
                                 key={index}
                                 onClick={() => {
                                     setCurrentValue(option.name);
-                                    onClick(id, currentValue);
+                                    onClick(id, option.name);
                                 }}
                                 className={styles.dropdown__item}
                             >

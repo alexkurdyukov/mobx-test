@@ -51,7 +51,7 @@ const TestLocationForm = ({ id }: { id: string }) => {
                 <Env id={id} />
                 <Servers />
             </div>
-            <Hint />
+            <Hint id={id} />
         </form>
     );
 };
@@ -99,12 +99,16 @@ const Servers = () => {
     );
 };
 
-const Hint = observer(() => {
+const Hint = observer(({ id }: { id: string }) => {
     const { changeСoncreteHint } = store;
     return (
         <div className={styles.hint}>
             <h3 className={styles.hint__header}>Подсказка</h3>
-            <Input icon={<FontAwesomeIcon icon={faQuestion} />} />
+            <Input
+                icon={<FontAwesomeIcon icon={faQuestion} />}
+                onBlur={changeСoncreteHint}
+                id={id}
+            />
         </div>
     );
 });

@@ -6,28 +6,11 @@ function sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export interface Location {
-    locationID: number;
-    name: string;
-}
-
-export interface Env {
-    envID: number;
-    name: string;
-}
-
 export interface Server {
     serverID: number;
     name: string;
     locationID: number;
     envID: number;
-}
-
-export interface Card {
-    location: null | Location;
-    env: null | Env;
-    hints: string;
-    id: string;
 }
 
 export class Store {
@@ -60,46 +43,68 @@ export class Store {
         this.cards = this.cards.filter((card) => card.id !== id);
     };
 
-    changeСoncreteHint = (payload: string, id: string) => {
-        console.log("изменение хинта");
-        this.cards.map((card) =>
+    changeСoncreteHint = (id: string, payload: string) => {
+        console.log(`id - ${id}, payload - ${payload}`);
+        const cards = this.cards.map((card) =>
             card.id === id
                 ? {
                       ...card,
-                      hint: payload,
+                      hints: payload,
                   }
                 : card
         );
-    };
-    changeСoncreteLocation = (payload: string, id: string) => {
-        console.log("айди карточки", id);
-        this.cards.map((card) =>
-            card.id === id
-                ? {
-                      ...card,
-                      location: payload,
-                  }
-                : card
-        );
-    };
-    changeСoncreteEnv = (payload: string, id: string) => {
-        console.log("айди карточки", id);
-        this.cards.map((card) =>
-            card.id === id
-                ? {
-                      ...card,
-                      env: payload,
-                  }
-                : card
-        );
-    };
-    logCards = () => {
-        console.log(this.cards);
+        this.cards = cards;
     };
 
+    // из дропдауна подаем также строку с именем локации
+    changeСoncreteLocation = (id: string, payload: string) => {
+        const envPayload = this.locations.find(
+            (location) => location?.name === payload
+        );
+        const cards = this.cards.map((card) =>
+            card.id === id
+                ? {
+                      ...card,
+                      location: envPayload,
+                  }
+                : card
+        );
+        this.cards = cards;
+    };
+
+    // в пэйлоад передаем имя из дропдауна, по нему и ищем нужный EnvObject в стэйте Env[]
+    changeСoncreteEnv = (id: string, payload: string) => {
+        const envPayload = this.envs.find((env) => env?.name === payload);
+        const cards = this.cards.map((card) =>
+            card.id === id
+                ? {
+                      ...card,
+                      env: envPayload,
+                  }
+                : card
+        );
+        this.cards = cards;
+    };
     constructor() {
         makeAutoObservable(this);
     }
+}
+
+export interface Card {
+    location: null | Location | undefined;
+    env: null | Env | undefined;
+    hints: string;
+    id: string;
+}
+
+export interface Env {
+    envID: number;
+    name: string;
+}
+
+export interface Location {
+    locationID: number;
+    name: string;
 }
 
 export default new Store();
