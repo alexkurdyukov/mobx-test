@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import sample from "./data.json";
+import { createUnicalID } from "./helpers/createUnicalID";
 
 function sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -19,7 +20,7 @@ export class Store {
     envs: Env[] = [];
     servers: Server[] = [];
     cards: Card[] = [];
-
+    count: number = 0; // вспомогательный стэйт, нужный для того, чтобы id карточек не повторялись, чтобы не было проблем с рендером у реакта
     fetchData = async () => {
         await sleep(3000);
         runInAction(() => {
@@ -29,14 +30,15 @@ export class Store {
             this.isLoaded = true;
         });
     };
-
     addCard = () => {
         this.cards.push({
             location: null,
             env: null,
             hints: "",
-            id: String(this.cards.length + 1),
+            id: String(this.count + 1),
+            // id: createUnicalID()
         });
+        this.count++;
     };
 
     deleteCard = (id: string) => {
@@ -44,7 +46,6 @@ export class Store {
     };
 
     changeСoncreteHint = (id: string, payload: string) => {
-        console.log(`id - ${id}, payload - ${payload}`);
         const cards = this.cards.map((card) =>
             card.id === id
                 ? {
@@ -56,7 +57,6 @@ export class Store {
         this.cards = cards;
     };
 
-    // из дропдауна подаем также строку с именем локации
     changeСoncreteLocation = (id: string, payload: string) => {
         const envPayload = this.locations.find(
             (location) => location?.name === payload
@@ -72,7 +72,6 @@ export class Store {
         this.cards = cards;
     };
 
-    // в пэйлоад передаем имя из дропдауна, по нему и ищем нужный EnvObject в стэйте Env[]
     changeСoncreteEnv = (id: string, payload: string) => {
         const envPayload = this.envs.find((env) => env?.name === payload);
         const cards = this.cards.map((card) =>

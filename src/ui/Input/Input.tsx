@@ -20,6 +20,6 @@ export const Input = ({ className, icon, onBlur, id }: InputProps) => {
 interface InputProps {
     icon?: React.ReactNode;
     className?: string;
-    onBlur: any;
+    onBlur: (id: string, payload: string) => void;
     id: string;
 }

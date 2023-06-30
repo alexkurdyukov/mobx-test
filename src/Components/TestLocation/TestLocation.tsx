@@ -86,19 +86,6 @@ const Env = observer(({ id }: { id: string }) => {
     );
 });
 
-const Servers = () => {
-    const { servers } = store;
-    return (
-        <div className={styles.servers}>
-            <h3 className={styles.servers__header}>Серверы</h3>
-            <FontAwesomeIcon icon={faServer} />
-            <div className={styles.servers__list}>
-                {servers.map((server, index) => `${server.name}`).join(", ")}
-            </div>
-        </div>
-    );
-};
-
 const Hint = observer(({ id }: { id: string }) => {
     const { changeСoncreteHint } = store;
     return (
@@ -112,3 +99,16 @@ const Hint = observer(({ id }: { id: string }) => {
         </div>
     );
 });
+
+const Servers = () => {
+    const { servers } = store;
+    return (
+        <div className={styles.servers}>
+            <h3 className={styles.servers__header}>Серверы</h3>
+            <FontAwesomeIcon icon={faServer} />
+            <div className={styles.servers__list}>
+                {servers.map((server, index) => `${server.name}`).join(", ")}
+            </div>
+        </div>
+    );
+};

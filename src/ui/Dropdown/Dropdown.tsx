@@ -3,7 +3,7 @@ import styles from "./Dropdown.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import cn from "classnames";
-import { useOnClickOutside } from "../../Hooks/useClickOutside";
+import { useOnClickOutside } from "../../hooks/useClickOutside";
 import { Env, Location } from "../../store";
 import { DEFAULT_DROPDOWN_TEXT } from "../../constants";
 
@@ -61,6 +61,6 @@ interface DropdownProps<T> {
     icon?: React.ReactNode;
     className?: string;
     options?: Array<T>;
-    onClick: any;
+    onClick: (id: string, payload: string) => void;
     id: string;
 }

@@ -1,4 +1,4 @@
-import { TestLocationsList } from "./Components/TestLocationList/TestLocationList";
+import { TestLocationsList } from "./components/TestLocationList/TestLocationList";
 
 export default function App() {
     return (

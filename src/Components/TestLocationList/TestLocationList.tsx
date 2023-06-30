@@ -1,13 +1,19 @@
 import { observer } from "mobx-react-lite";
-import { Loader } from "../Loader/Loader";
+
 import store from "../../store";
-import { TestLocation } from "../TestLocation/TestLocation";
-import { AppWidget } from "../AppWidget/AppWidget";
+
 import styles from "./TestLocation.module.scss";
+import { AppWidget } from "../AppWidget/AppWidget";
+import { TestLocation } from "../TestLocation/TestLocation";
+import { Loader } from "../Loader/Loader";
+import { useEffect } from "react";
 
 export const TestLocationsList = observer(() => {
     const { fetchData, isLoaded } = store;
-    fetchData();
+    useEffect(() => {
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     if (!isLoaded) {
         return <Loader />;
     }
@@ -20,10 +26,7 @@ export const TestLocationsList = observer(() => {
 });
 
 const LocationList = observer(() => {
-    const { cards, isLoaded } = store;
-    if (!isLoaded) {
-        return <Loader />;
-    }
+    const { cards } = store;
     return (
         <div className={styles.TestLocationsList__wrapper}>
             {cards.map((card, index) => (
