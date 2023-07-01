@@ -5,6 +5,10 @@
 
     border: 2px solid rgb(225, 221, 221);
     padding: 15px 30px;
+    transition: 0.2s all ease-in;
+    &:hover {
+        border: 2px solid #103c79;
+    }
 }
 
 .header {
@@ -12,13 +16,13 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-
     width: 100%;
     &__text {
         font-size: 30px;
     }
     &__button {
         margin-left: auto;
+        cursor: pointer;
     }
     &__icon {
         transform: scale(1.5);
@@ -37,6 +41,9 @@
         align-items: center;
         justify-content: space-between;
         gap: 35px;
+        @media (max-width: 1100px) {
+            flex-wrap: wrap;
+        }
     }
     &__bottom {
         width: 100%;
@@ -47,6 +54,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    &__header {
+        margin-right: 25px;
+        @media (max-width: 900px) {
+            margin-right: 0;
+        }
+    }
 }
 
 .env {
@@ -58,9 +71,13 @@
 .servers {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     &__header {
-        margin-right: 10px;
+        margin-right: 5px;
+    }
+    &__list {
+        font-size: 14px;
+        font-weight: 600;
     }
 }
 

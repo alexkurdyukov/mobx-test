@@ -1,7 +1,5 @@
 import { observer } from "mobx-react-lite";
-
 import store from "../../store";
-
 import styles from "./TestLocation.module.scss";
 import { AppWidget } from "../AppWidget/AppWidget";
 import { TestLocation } from "../TestLocation/TestLocation";
