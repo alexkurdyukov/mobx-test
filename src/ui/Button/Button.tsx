@@ -3,10 +3,10 @@ import cn from "classnames";
 
 export const Button = ({ className, onClick, text, icon }: ButtonProps) => {
     return (
-        <div onClick={onClick} className={cn(styles.Button, className)}>
+        <button onClick={onClick} className={cn(styles.Button, className)}>
             {icon && icon}
             <p className={styles.Button__text}>{text}</p>
-        </div>
+        </button>
     );
 };
 
